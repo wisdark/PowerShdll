@@ -4,9 +4,6 @@ using System.Collections.ObjectModel;
 using System.Management.Automation;
 using System.Management.Automation.Runspaces;
 using System.IO;
-using System.Runtime.InteropServices;
-using Microsoft.Win32.SafeHandles;
-using System.Diagnostics;
 
 //https://blogs.msdn.microsoft.com/kebab/2014/04/28/executing-powershell-scripts-from-c/
 
@@ -22,7 +19,7 @@ namespace Powershdll
         }
         public void interact()
         {
-            Console.WriteLine("PowerShdll.dll v0.1");
+            Console.WriteLine("PowerShdll.exe");
             string cmd = "";
             while (cmd.ToLower() != "exit")
             {
@@ -58,12 +55,13 @@ namespace Powershdll
         {
             Console.WriteLine("Usage:");
             Console.WriteLine("PowerShdll.exe <script>");
+            Console.WriteLine("PowerShdll.exe -h\t Display this messages");
             Console.WriteLine("PowerShdll.exe -f <path>\t Run the script passed as argument");
-            Console.WriteLine("PowerShdll.exe -i\t Start an interactive console");
+            Console.WriteLine("PowerShdll.exe -i\t Start an interactive console (Default)");
         }
         public void start(string[] args)
         {
-            if (args.Length==0) { usage(); return; }
+            if (args.Length==0) { this.interact(); return; }
             else if (args[0] == "-h")
             {
                 usage();
